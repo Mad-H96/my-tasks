@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-use App\Models\Task;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,17 +9,20 @@ class Project extends Model
 {
     use HasFactory;
 
-    public function task()
+    protected $fillable = ['image_path', 'name', 'description', 'status', 'due_date', 'created_by', 'updated_by'];
+
+    public function tasks()
     {
         return $this->hasMany(Task::class);
     }
 
-    public function createdBy(){
+    public function createdBy()
+    {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function updatedBy(){
+    public function updatedBy()
+    {
         return $this->belongsTo(User::class, 'updated_by');
     }
-
 }
